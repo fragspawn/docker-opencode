@@ -4,4 +4,4 @@ USER root
 
 RUN set -eux; \
     apk add --no-cache git vim diffutils grep gawk \
-        nodejs npm composer bash openssl docker-cli;
+        nodejs npm composer bash openssl starship docker-cli;
