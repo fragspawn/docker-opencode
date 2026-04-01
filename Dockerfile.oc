@@ -1,7 +1,13 @@
 FROM ghcr.io/anomalyco/opencode
 
 USER root
+WORKDIR /root
+
+COPY tools/starship.toml ./.config/starship.toml
+COPY tools/bashrc ./.bashrc
 
 RUN set -eux; \
-    apk add --no-cache git vim diffutils grep gawk \
+    apk add --no-cache git vim diffutils grep gawk aws-cli \
         nodejs npm composer bash openssl starship docker-cli;
+
+SHELL ["/bin/bash", "-euo", "pipefail", "-c"]

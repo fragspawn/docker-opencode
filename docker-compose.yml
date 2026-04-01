@@ -12,6 +12,7 @@ services:
     environment:
       OPENCODE_SERVER_USERNAME: ${OPENCODE_SERVER_USERNAME:-admin}
       OPENCODE_SERVER_PASSWORD: ${OPENCODE_SERVER_PASSWORD:-abc123}
+      STARSHIP_CONFIG: /root/.config/starship.toml
       WORKDIR: /workspace
     volumes:
       - workspace:/workspace
