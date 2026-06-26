@@ -10,6 +10,6 @@ COPY tools/shrc ./.shrc
 RUN set -eux; \
     apk add --no-cache git vim diffutils grep gawk aws-cli \
         mariadb-client curl wget jq \
-        nodejs npm composer bash openssl starship docker-cli;ß
+        nodejs npm composer bash openssl starship docker-cli;
 
 SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
