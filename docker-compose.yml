@@ -15,7 +15,7 @@ services:
       STARSHIP_CONFIG: /root/.config/starship.toml
       WORKDIR: /workspace
     volumes:
-      - workspace:/workspace
+      - ./workspace:/workspace:z
       #- ./opencode:/root/.config/opencode
       - /var/run/docker.sock:/var/run/docker.sock
     working_dir: /workspace
