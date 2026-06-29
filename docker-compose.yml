@@ -5,6 +5,9 @@ services:
       context: .
       dockerfile: Dockerfile.oc
     container_name: opencode
+    user: "1000:1000"
+    group_add:
+      - "0"
     command: ["web", "--port", "4012", "--hostname", "0.0.0.0"]
     ports:
       - "9000:9000"
@@ -12,8 +15,10 @@ services:
     environment:
       OPENCODE_SERVER_USERNAME: ${OPENCODE_SERVER_USERNAME:-admin}
       OPENCODE_SERVER_PASSWORD: ${OPENCODE_SERVER_PASSWORD:-abc123}
-      STARSHIP_CONFIG: /root/.config/starship.toml
+      STARSHIP_CONFIG: /home/opencode/.config/starship.toml
+      HOME: /home/opencode
       WORKDIR: /workspace
+      LD_PRELOAD: /lib/libgcompat.so.0
     volumes:
       - ./workspace:/workspace:z
       #- ./opencode:/root/.config/opencode

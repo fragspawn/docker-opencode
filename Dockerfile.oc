@@ -1,15 +1,22 @@
 FROM ghcr.io/anomalyco/opencode
 
 USER root
-WORKDIR /root
+WORKDIR /home/opencode
 
-COPY tools/starship.toml ./.config/starship.toml
-COPY tools/bashrc ./.bashrc
-COPY tools/shrc ./.shrc
+COPY tools/starship.toml /home/opencode/.config/starship.toml
+COPY tools/bashrc /home/opencode/.bashrc
+COPY tools/shrc /home/opencode/.shrc
 
 RUN set -eux; \
     apk add --no-cache git vim diffutils grep gawk aws-cli \
         mariadb-client curl wget jq xdg-utils \
-        nodejs npm composer bash openssl starship docker-cli;
+        nodejs npm composer bash openssl starship docker-cli \
+        gcompat libc6-compat;
+
+RUN set -eux; \
+    addgroup -g 1000 -S opencode || true; \
+    adduser -u 1000 -S -D -G opencode -h /home/opencode opencode || true; \
+    mkdir -p /home/opencode/.config; \
+    chown -R 1000:1000 /home/opencode
 
 SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
